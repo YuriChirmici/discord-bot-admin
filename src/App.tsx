@@ -1,7 +1,8 @@
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Box, CssBaseline, Container, Toolbar, Typography, AppBar } from '@mui/material';
 import { Menu } from './Components/Menu';
 import { Settings } from './Components/Settings';
+import { Provider } from './Components/Provider';
 
 const sections = [
 	{ text: 'Основное', path: '/' },
@@ -10,7 +11,7 @@ const sections = [
 
 export default function App() {
 	return (
-		<Router>
+		<Provider>
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
 				<AppBar position="fixed" sx={{ zIndex: 1201 }}>
@@ -32,6 +33,6 @@ export default function App() {
 					</Container>
 				</Box>
 			</Box>
-		</Router>
+		</Provider>
 	);
 }

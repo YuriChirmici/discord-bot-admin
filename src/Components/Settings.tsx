@@ -6,10 +6,15 @@ import {
 	CssBaseline,
 	Toolbar,
 	Typography,
+	Switch,
+	FormControlLabel,
+	FormGroup
 } from '@mui/material';
+import { useThemeContext } from '../theme/ThemeContext';
 
 export const Settings = () => {
 	const [ version, setVersion ] = useState('');
+	const { toggleTheme, isDark } = useThemeContext();
 
 	useEffect(() => {
 		window.ipcRenderer.invoke('get-app-version').then(setVersion);
@@ -38,6 +43,14 @@ export const Settings = () => {
 				<Button variant="contained" onClick={handleCheckUpdates} sx={{ marginBottom: 2 }}>
 					Проверить обновления
 				</Button>
+
+				{/* Переключатель для смены темы */}
+				<FormGroup>
+					<FormControlLabel
+						control={<Switch checked={isDark} onChange={() => toggleTheme()} />}
+						label="Тёмная тема"
+					/>
+				</FormGroup>
 
 				{version && (
 					<Typography variant="body1" sx={{ marginTop: 2 }}>
