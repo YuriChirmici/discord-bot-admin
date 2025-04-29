@@ -1,9 +1,9 @@
 // @see - https://www.electron.build/configuration/configuration
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "io.github.YuriChirmici.discord-bot-admin-gui",
   "asar": true,
-  "productName": "YourAppName",
+  "productName": "AdminGUI",
   "directories": {
     "output": "release/${version}"
   },
@@ -11,12 +11,12 @@
     "dist",
     "dist-electron"
   ],
-  "mac": {
-    "target": [
-      "dmg"
-    ],
-    "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
-  },
+//   "mac": {
+//     "target": [
+//       "dmg"
+//     ],
+//     "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
+//   },
   "win": {
     "target": [
       {
@@ -34,10 +34,17 @@
     "allowToChangeInstallationDirectory": true,
     "deleteAppDataOnUninstall": false
   },
-  "linux": {
-    "target": [
-      "AppImage"
-    ],
-    "artifactName": "${productName}-Linux-${version}.${ext}"
-  }
+//   "linux": {
+//     "target": [
+//       "AppImage"
+//     ],
+//     "artifactName": "${productName}-Linux-${version}.${ext}"
+//   },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "YuriChirmici",
+      "repo": "https://github.com/YuriChirmici/discord-bot-admin"
+    }
+  ],
 }
