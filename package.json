@@ -1,21 +1,26 @@
 {
   "name": "bot-admin-gui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.11",
   "description": "Admin GUI for Discord Bot",
   "author": "w3yuri",
   "type": "module",
   "scripts": {
     "dev": "vite",
-	"build": "tsc && vite build && electron-builder --publish never",
-	"publish": "dotenv -e .env -- electron-builder --publish always",
+    "build": "tsc && vite build",
+    "electron:build": "npm run build && electron-builder --publish never",
+    "electron:publish": "npm run build && dotenv -e .env -- electron-builder --publish always",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.2",
     "electron-updater": "^6.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^7.5.3",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
@@ -24,7 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react": "^4.2.1",
-	"dotenv-cli": "^8.0.0",
+    "dotenv-cli": "^8.0.0",
     "electron": "^30.0.1",
     "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
