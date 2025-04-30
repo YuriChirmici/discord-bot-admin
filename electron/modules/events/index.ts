@@ -1,6 +1,3 @@
-import { initUpdateEvents } from '../auto-updater';
-import '../form-data';
-
-export const initEvents = () => {
-	initUpdateEvents();
-};
+import '../auto-updater';
+import '../config/events';
+import '../discord-client/events';

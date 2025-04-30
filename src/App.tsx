@@ -1,8 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
-import { Box, CssBaseline, Container, Toolbar, Typography, AppBar } from '@mui/material';
-import { Menu } from './Components/Menu';
-import { Settings } from './Components/Settings';
-import { Provider } from './Components/Provider';
+import { Box, CssBaseline, Toolbar, Typography, AppBar } from '@mui/material';
+import { Menu } from './components/Menu';
+import { Provider } from './components/Provider';
+import { Content } from './components/Content';
 
 const sections = [
 	{ text: 'Основное', path: '/' },
@@ -21,16 +20,11 @@ export default function App() {
 						</Typography>
 					</Toolbar>
 				</AppBar>
+
 				<Menu sections={sections} />
 
 				<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-					<Container maxWidth="md">
-						<Toolbar />
-
-						<Routes>
-							<Route path="/settings" element={<Settings />} />
-						</Routes>
-					</Container>
+					<Content />
 				</Box>
 			</Box>
 		</Provider>

@@ -37,23 +37,21 @@ const checkUpdate = async () => {
 	});
 };
 
-export const initUpdateEvents = () => {
-	ipcMain.handle('check-for-updates', async () => {
-		try {
-			const result = await checkUpdate();
-			if (result === 'success') {
-				return { message: 'Обновление будет установлено в ближайшее время.' };
-			} else if (result === 'no-update') {
-				return { message: 'Версия актуальная.' };
-			}
-		} catch (err) {
-			console.error(err);
-			return { message: 'Ошибка при проверке обновлений.' };
+ipcMain.handle('check-for-updates', async () => {
+	try {
+		const result = await checkUpdate();
+		if (result === 'success') {
+			return { message: 'Обновление будет установлено в ближайшее время.' };
+		} else if (result === 'no-update') {
+			return { message: 'Версия актуальная.' };
 		}
-	});
+	} catch (err) {
+		console.error(err);
+		return { message: 'Ошибка при проверке обновлений.' };
+	}
+});
 
-	ipcMain.handle('get-app-version', () => {
-		const version = app.getVersion();
-		return version;
-	});
-};
+ipcMain.handle('get-app-version', () => {
+	const version = app.getVersion();
+	return version;
+});

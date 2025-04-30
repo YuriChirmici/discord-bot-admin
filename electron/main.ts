@@ -1,7 +1,9 @@
 import { app, BrowserWindow } from 'electron';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { initEvents } from './modules/events';
+import './modules/events';
+import { discordClientService } from './modules/discord-client/service';
+import { configService } from './modules/config/service';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname, '..');
@@ -18,6 +20,7 @@ function createWindow() {
 	win = new BrowserWindow({
 		icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
 		webPreferences: {
+			nodeIntegration: true,
 			preload: path.join(__dirname, 'preload.mjs'),
 		},
 	});
@@ -34,8 +37,16 @@ function createWindow() {
 		win.loadFile(path.join(RENDERER_DIST, 'index.html'));
 	}
 
-	initEvents();
+	initModules();
+
 }
+
+const initModules = async () => {
+	const config = await configService.getConfig();
+	if (config?.token && config?.guildId) {
+		await discordClientService.login(config);
+	}
+};
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	Box,
 	Button,
@@ -11,6 +11,7 @@ import {
 	FormGroup
 } from '@mui/material';
 import { useThemeContext } from '../theme/ThemeContext';
+import { ConfigFileUpload } from './ConfigFileUpload';
 
 export const Settings = () => {
 	const [ version, setVersion ] = useState('');
@@ -31,7 +32,7 @@ export const Settings = () => {
 	};
 
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', p: 3 }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column', p: 3 }}>
 			<CssBaseline />
 			<Container maxWidth="sm">
 				<Toolbar />
@@ -39,12 +40,12 @@ export const Settings = () => {
 					Настройки
 				</Typography>
 
-				{/* Кнопка для проверки обновлений */}
+				<ConfigFileUpload />
+
 				<Button variant="contained" onClick={handleCheckUpdates} sx={{ marginBottom: 2 }}>
 					Проверить обновления
 				</Button>
 
-				{/* Переключатель для смены темы */}
 				<FormGroup>
 					<FormControlLabel
 						control={<Switch checked={isDark} onChange={() => toggleTheme()} />}
