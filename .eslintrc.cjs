@@ -30,7 +30,7 @@ module.exports = {
 		"no-floating-decimal": "error",
 		"no-multi-spaces": "error",
 		"no-multiple-empty-lines": [ "error", { "max": 1, "maxEOF": 1, "maxBOF": 0 } ],
-		"no-shadow": [ "error", { "allow": [ "err", "resolve", "reject" ] } ],
+		// "no-shadow": [ "error", { "allow": [ "err", "resolve", "reject" ] } ],
 		"no-trailing-spaces": [ "error" ],
 		"no-var": "error",
 		"object-curly-spacing": [ "error", "always" ],

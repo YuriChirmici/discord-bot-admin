@@ -4,7 +4,6 @@ import {
 	Button,
 	Container,
 	CssBaseline,
-	Toolbar,
 	Typography,
 	Switch,
 	FormControlLabel,
@@ -12,10 +11,12 @@ import {
 } from '@mui/material';
 import { useThemeContext } from '../theme/ThemeContext';
 import { ConfigFileUpload } from './ConfigFileUpload';
+import { useAppStore } from '../store/useAppStore';
 
 export const Settings = () => {
 	const [ version, setVersion ] = useState('');
 	const { toggleTheme, isDark } = useThemeContext();
+	const { setLoading } = useAppStore();
 
 	useEffect(() => {
 		window.ipcRenderer.invoke('get-app-version').then(setVersion);
@@ -23,8 +24,11 @@ export const Settings = () => {
 
 	const handleCheckUpdates = async () => {
 		try {
+			setLoading(true);
 			const result = await window.ipcRenderer.invoke('check-for-updates');
-			alert(result.message);
+			setLoading(false);
+
+			setTimeout(() => alert(result.message), 10);
 		} catch (error) {
 			console.error(error);
 			alert('Ошибка при проверке обновлений.');
@@ -32,10 +36,9 @@ export const Settings = () => {
 	};
 
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column', p: 3 }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
 			<CssBaseline />
 			<Container maxWidth="sm">
-				<Toolbar />
 				<Typography variant="h4" gutterBottom>
 					Настройки
 				</Typography>

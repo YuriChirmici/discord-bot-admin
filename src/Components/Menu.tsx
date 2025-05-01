@@ -12,7 +12,6 @@ interface Props {
 
 export const Menu: React.FC<Props> = ({ sections }) => {
 	const location = useLocation();
-
 	const isActive = (path: string) => location.pathname === path;
 
 	return (

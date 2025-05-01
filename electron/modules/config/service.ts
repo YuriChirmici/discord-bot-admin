@@ -24,7 +24,7 @@ class ConfigService {
 
 	async getConfig(): Promise<TConfig> {
 		const dataString = await fs.promises.readFile(this.configPath, 'utf-8');
-		const data = JSON.parse(dataString);
+		const data = dataString ? JSON.parse(dataString) : {};
 
 		return data;
 	}

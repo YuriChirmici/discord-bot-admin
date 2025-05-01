@@ -1,5 +1,6 @@
 import { autoUpdater } from 'electron-updater';
 import { ipcMain, app } from 'electron';
+import isDev from 'electron-is-dev';
 
 autoUpdater.setFeedURL({
 	provider: 'github',
@@ -7,7 +8,11 @@ autoUpdater.setFeedURL({
 	repo: 'discord-bot-admin',
 });
 
-const checkUpdate = async () => {
+const checkUpdate = () => {
+	if (isDev) {
+		return Promise.resolve('no-update');
+	}
+
 	return new Promise((resolve, reject) => {
 		try {
 			autoUpdater.once('update-available', (info) => {

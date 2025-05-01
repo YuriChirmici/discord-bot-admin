@@ -1,7 +1,7 @@
 import { ipcMain } from 'electron';
 import { configService } from './service';
 import { TConfig } from '../../../src/schemas/config/config';
-import { discordClientService } from '../discord-client/service';
+import { appDataService } from '../app-module/service';
 
 ipcMain.handle('get-config', async () => {
 	const config = await configService.getConfig();
@@ -10,7 +10,6 @@ ipcMain.handle('get-config', async () => {
 
 ipcMain.handle('upload-config-file', async (_event, config: TConfig) => {
 	await configService.uploadConfigFile(config);
-	if (!discordClientService.client && config?.token && config?.guildId) {
-		await discordClientService.login(config);
-	}
+	return await appDataService.reinitData();
 });
+
