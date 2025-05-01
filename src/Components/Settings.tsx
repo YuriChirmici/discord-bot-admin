@@ -3,7 +3,6 @@ import {
 	Box,
 	Button,
 	Container,
-	CssBaseline,
 	Typography,
 	Switch,
 	FormControlLabel,
@@ -38,7 +37,6 @@ export const Settings: React.FC<Props> = () => {
 
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 20 }}>
-			<CssBaseline />
 			<Container maxWidth="sm">
 				<Typography variant="h4" gutterBottom>
 					Настройки

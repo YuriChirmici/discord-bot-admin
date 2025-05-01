@@ -1,7 +1,5 @@
-// ThemeContext.tsx
 import { createContext, useContext, useMemo, useState } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
 
 const ThemeContext = createContext({
@@ -21,7 +19,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ThemeContext.Provider value={{ toggleTheme, isDark }}>
 			<MuiThemeProvider theme={theme}>
-				<CssBaseline />
 				{children}
 			</MuiThemeProvider>
 		</ThemeContext.Provider>

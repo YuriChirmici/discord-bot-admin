@@ -1,7 +1,6 @@
 import {
 	Box,
 	Button,
-	CssBaseline,
 	Typography,
 } from '@mui/material';
 import { useAppStore } from '../store/useAppStore';
@@ -60,7 +59,6 @@ export const ConfigJSON: React.FC<Props> = () => {
 			justifyContent: 'center',
 			alignItems: 'center',
 		}}>
-			<CssBaseline />
 			<Box sx={{ width: '70vw', minWidth: 1100 }}>
 				<Typography variant="h4" gutterBottom marginBottom={5}>
 					Конфиг JSON

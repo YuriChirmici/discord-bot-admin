@@ -48,6 +48,7 @@ module.exports = {
 		"space-unary-ops": "error",
 		"yoda": "error",
 		"eol-last": [ "error", "always" ],
-		"no-empty": [ "error", { "allowEmptyCatch": true } ]
+		"no-empty": [ "error", { "allowEmptyCatch": true } ],
+		'@typescript-eslint/no-explicit-any': 'warn',
 	},
 }
