@@ -1,6 +1,6 @@
 import { Client, ClientUser, Events, Guild } from 'discord.js';
 import { TConfig } from '../../../src/schemas/config/config';
-import { IRole } from '../../../src/store/app-store-types';
+import { IChannel, IRole } from '../../../src/store/app-store-types';
 
 class ClientService {
 	client: Client | null = null;
@@ -34,13 +34,36 @@ class ClientService {
 			return [];
 		}
 
-		const rolesMap = await this.guild?.roles.fetch();
-		const roles = rolesMap ? Array.from(rolesMap.values()) : [];
+		const rolesMap = await this.guild.roles.fetch();
+		const roles = Array.from(rolesMap.values());
 
 		return roles.map(role => ({
 			id: role.id,
 			name: role.name,
 		}));
+	}
+
+	async getChannels(): Promise<IChannel[]> {
+		if (!this.guild) {
+			return [];
+		}
+
+		const channelsMap = await this.guild.channels.fetch();
+		const channels = Array.from(channelsMap.values());
+
+		return channels
+			.map((channel) => {
+				if (!channel) {
+					return null;
+				}
+
+				return {
+					id: channel.id,
+					name: channel.name,
+					type: channel.type,
+				};
+			})
+			.filter((c): c is IChannel => c !== null);
 	}
 }
 

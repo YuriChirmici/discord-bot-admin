@@ -5,6 +5,15 @@ export interface IRole {
 	name: string;
 }
 
+export interface IChannel {
+	id: string;
+	name: string;
+	type: 0 | 2 | 4;
+}
+// 0 - Text
+// 2 - Voice
+// 4 - Category
+
 export interface IBotInfo {
 	id: string;
 	tag: string;
@@ -13,5 +22,6 @@ export interface IBotInfo {
 export interface IAppData {
 	config: TConfig | null;
 	roles: IRole[];
+	channels: IChannel[];
 	botInfo: IBotInfo | null;
 }

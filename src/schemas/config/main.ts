@@ -14,9 +14,9 @@ export const mainConfigSchema = z.object({
 
 	voiceConnections: z.array(
 		z.object({
-			channelId: z.string(),
-			categoryId: z.string(),
-			channelName: z.string(),
+			channelId: z.string().min(1),
+			categoryId: z.string().min(1),
+			channelName: z.string().min(2),
 		})
 	),
 

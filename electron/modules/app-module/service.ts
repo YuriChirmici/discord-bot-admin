@@ -86,10 +86,12 @@ class AppDataService {
 
 		const bot = discordClientService.bot;
 		const roles = await discordClientService.getRoles();
+		const channels = await discordClientService.getChannels();
 
 		return {
 			config,
 			roles,
+			channels: channels.filter(c => [ 0, 2, 4 ].includes(c.type)),
 			botInfo: bot && {
 				id: bot.id,
 				tag: bot.tag,

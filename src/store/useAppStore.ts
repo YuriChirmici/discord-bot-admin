@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { TConfig } from '../schemas/config/config';
-import { IAppData, IRole } from './app-store-types';
+import { IAppData, IChannel, IRole } from './app-store-types';
 
 interface AppState {
 	config: TConfig | null;
@@ -15,6 +15,7 @@ interface AppState {
 	setAppData: (data: IAppData) => void;
 
 	roles: IRole[];
+	channels: IChannel[];
 	botInfo: IAppData['botInfo'];
 
 }
@@ -32,10 +33,11 @@ export const useAppStore = create<AppState>((set) => ({
 	setAppData: (data) => set({
 		config: data.config,
 		roles: data.roles,
+		channels: data.channels,
 		botInfo: data.botInfo,
 	}),
 
 	roles: [],
+	channels: [],
 	botInfo: null,
-
 }));
