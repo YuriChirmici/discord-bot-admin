@@ -14,9 +14,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
+    "@uiw/react-codemirror": "^4.23.12",
     "discord.js": "^14.11.0",
     "electron-is-dev": "^3.0.1",
     "electron-updater": "^6.6.2",

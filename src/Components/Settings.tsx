@@ -13,7 +13,8 @@ import { useThemeContext } from '../theme/ThemeContext';
 import { ConfigFileUpload } from './ConfigFileUpload';
 import { useAppStore } from '../store/useAppStore';
 
-export const Settings = () => {
+interface Props {}
+export const Settings: React.FC<Props> = () => {
 	const [ version, setVersion ] = useState('');
 	const { toggleTheme, isDark } = useThemeContext();
 	const { setLoading } = useAppStore();
@@ -36,7 +37,7 @@ export const Settings = () => {
 	};
 
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 20 }}>
 			<CssBaseline />
 			<Container maxWidth="sm">
 				<Typography variant="h4" gutterBottom>

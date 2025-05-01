@@ -8,8 +8,8 @@ ipcMain.handle('get-config', async () => {
 	return config;
 });
 
-ipcMain.handle('upload-config-file', async (_event, config: TConfig) => {
-	await configService.uploadConfigFile(config);
+ipcMain.handle('set-config', async (_event, config: TConfig) => {
+	await configService.setConfig(config);
 	return await appDataService.reinitData();
 });
 

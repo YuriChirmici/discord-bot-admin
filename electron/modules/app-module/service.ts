@@ -79,13 +79,12 @@ class AppDataService {
 
 	async initData(): Promise<IAppData> {
 		const config = await configService.getConfig();
-		if (config?.token && config?.guildId) {
+		if (!discordClientService.client && config?.token && config?.guildId) {
 			console.log('starting discord client');
 			await discordClientService.login(config);
 		}
 
 		const bot = discordClientService.bot;
-
 		const roles = await discordClientService.getRoles();
 
 		return {

@@ -6,6 +6,6 @@ export const getConfig = async (): Promise<TConfig> => {
 	return config;
 };
 
-export const uploadConfigFile = async (config: TConfig): Promise<IAppData> => {
-	return await window.ipcRenderer.invoke('upload-config-file', config);
+export const setConfig = async (config: TConfig): Promise<IAppData> => {
+	return await window.ipcRenderer.invoke('set-config', config);
 };

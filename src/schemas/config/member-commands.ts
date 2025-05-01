@@ -8,7 +8,7 @@ const baseOptionData = z.object({
 
 const buttonSchema = z.object({
 	next: z.string().optional(),
-	text: z.string(),
+	text: z.string().optional(),
 	resultText: z.string().optional(),
 	url: z.string().optional(),
 	style: z.number().optional(),
@@ -82,7 +82,7 @@ const baseCommandSchema = z.object({
 
 const formCommand = baseCommandSchema.extend({
 	type: z.literal('form'),
-	parentChannelId: z.string(),
+	parentChannelId: z.string().optional(),
 	channelName: z.string(),
 	initialRoles: z.array(z.string()),
 	resultHeader: z.string(),
@@ -93,7 +93,7 @@ const formCommand = baseCommandSchema.extend({
 
 const modalCommand = baseCommandSchema.extend({
 	type: z.literal('modal'),
-	parentChannelId: z.string(),
+	parentChannelId: z.string().optional(),
 	resultHeader: z.string(),
 	resultChannelId: z.string(),
 	userReplyResult: z.string(),

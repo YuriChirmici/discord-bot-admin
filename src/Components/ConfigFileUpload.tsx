@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Box } from '@mui/material';
-import { uploadConfigFile } from '../api/config';
+import { setConfig } from '../api/config';
 import { useAppStore } from '../store/useAppStore';
 
 interface Props {
@@ -23,7 +23,7 @@ export const ConfigFileUpload: React.FC<Props> = () => {
 			try {
 				const json = JSON.parse(e.target?.result as string);
 
-				const newData = await uploadConfigFile(json);
+				const newData = await setConfig(json);
 				setAppData(newData);
 			} catch (err) {
 				alert('Ошибка парсинга JSON: ' + (err instanceof Error ? err.message : ''));

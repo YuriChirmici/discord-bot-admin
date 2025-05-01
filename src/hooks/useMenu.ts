@@ -13,10 +13,10 @@ export const useMenu = (config: TConfig | null): IUseMenu => {
 	const configInitialized = config?.clientId !== null;
 
 	const sections = [
-		// { text: 'Основное', path: '/' },
 		...(
 			configInitialized ? [
-				// { text: 'Роли', path: '/roles' },
+				{ text: 'Основное', path: '/general' },
+				{ text: 'JSON', path: '/config-json' },
 			] : []
 		),
 		{ text: 'Настройки', path: '/' }

@@ -15,10 +15,12 @@ class ConfigService {
 		if (!fs.existsSync(this.configPath)) {
 			fs.writeFileSync(this.configPath, JSON.stringify({}));
 		}
+
+		console.log('Config path: ' + this.configPath);
 	}
 
-	async uploadConfigFile(data: TConfig) {
-		const parsedData = configSchema.parse(data);
+	async setConfig(config: TConfig) {
+		const parsedData = configSchema.parse(config);
 		await fs.promises.writeFile(this.configPath, JSON.stringify(parsedData, null, 2), 'utf-8');
 	}
 
