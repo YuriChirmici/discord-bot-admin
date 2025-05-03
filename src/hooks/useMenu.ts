@@ -17,6 +17,7 @@ export const useMenu = (config: TConfig | null): IUseMenu => {
 			configInitialized ? [
 				{ text: 'Основное', path: '/general' },
 				{ text: 'Temp Voice', path: '/temp-voice' },
+				{ text: 'Слоты', path: '/slots' },
 				{ text: 'JSON', path: '/config-json' },
 			] : []
 		),

@@ -15,8 +15,8 @@ export const General: React.FC<Props> = () => {
 	const { channels } = useAppStore();
 
 	const validate = (dirtyConfig: TConfig) => {
-		const { guildId, clientId, token, botMemberId, errorsChannelId } = dirtyConfig;
-		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !permissionsFlags) {
+		const { guildId, clientId, token, botMemberId, errorsChannelId, sheetMembersChannelId } = dirtyConfig;
+		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !sheetMembersChannelId || !permissionsFlags) {
 			return { isValid: false, validationError: 'Заполните все поля' };
 		}
 
@@ -29,7 +29,7 @@ export const General: React.FC<Props> = () => {
 			setPermissionsFlags(flags);
 		};
 		fetchPermissionsFlags();
-	});
+	}, []);
 
 	return (
 		<BaseConfigPageLayout validate={validate}>
@@ -100,6 +100,22 @@ export const General: React.FC<Props> = () => {
 							{...params}
 							label="Канал ошибок"
 							error={!dirtyConfig.errorsChannelId}
+						/>
+					)}
+				/>
+
+				<Autocomplete
+					options={channels.filter(c => c.type === 0)}
+					getOptionLabel={(option) => option.name}
+					getOptionKey={(option => option.id)}
+					value={channels.find(c => c.id === dirtyConfig.sheetMembersChannelId) || null}
+					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, sheetMembersChannelId: val?.id || '' }))}
+					sx={{ mb: 2 }}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							label="Канал слотов"
+							error={!dirtyConfig.sheetMembersChannelId}
 						/>
 					)}
 				/>
