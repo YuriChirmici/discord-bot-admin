@@ -8,12 +8,12 @@ import {
 	FormControlLabel,
 	FormGroup
 } from '@mui/material';
-import { useThemeContext } from '../theme/ThemeContext';
+import { useThemeContext } from '../../theme/ThemeContext';
 // import { ConfigFileUpload } from './ConfigFileUpload';
-import { useAppStore } from '../store/useAppStore';
-import PasswordInput from './ui/PasswordInput';
-import { refreshDiscordCache, setLocalConfig } from '../api/config';
-import { useAlertStore } from '../store/useAlertStore';
+import { useAppStore } from '../../store/useAppStore';
+import PasswordInput from '../ui/PasswordInput';
+import { refreshDiscordCache, setLocalConfig } from '../../api/config';
+import { useAlertStore } from '../../store/useAlertStore';
 
 interface Props {}
 export const Settings: React.FC<Props> = () => {

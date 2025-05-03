@@ -3,18 +3,20 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import PasswordInput from './ui/PasswordInput';
-import { BaseConfigPageLayout } from './BaseConfigPageLayout';
-import { TConfig } from '../schemas/config/config';
+import PasswordInput from '../ui/PasswordInput';
+import { BaseConfigPageLayout } from '../BaseConfigPageLayout';
+import { TConfig } from '../../schemas/config/config';
 import { useEffect, useState } from 'react';
+import { useAppStore } from '../../store/useAppStore';
 
 interface Props { }
 export const General: React.FC<Props> = () => {
 	const [ permissionsFlags, setPermissionsFlags ] = useState<string[]>([]);
+	const { channels } = useAppStore();
 
 	const validate = (dirtyConfig: TConfig) => {
-		const { guildId, clientId, token, botMemberId } = dirtyConfig;
-		if (!guildId || !clientId || !token || !botMemberId) {
+		const { guildId, clientId, token, botMemberId, errorsChannelId } = dirtyConfig;
+		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !permissionsFlags) {
 			return { isValid: false, validationError: 'Заполните все поля' };
 		}
 
@@ -37,7 +39,7 @@ export const General: React.FC<Props> = () => {
 				</Typography>
 
 				<TextField
-					label="ID сервера"
+					label="ID Дискорд сервера"
 					fullWidth
 					value={dirtyConfig.guildId}
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, guildId: e.target.value }))}
@@ -76,12 +78,28 @@ export const General: React.FC<Props> = () => {
 					options={permissionsFlags}
 					value={dirtyConfig.commandsPermission}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, commandsPermission: val || '' }))}
-					sx={{ flex: 1 }}
+					sx={{ mb: 2 }}
 					renderInput={(params) => (
 						<TextField
 							{...params}
 							label="Права доступа к командам"
 							error={!dirtyConfig.commandsPermission}
+						/>
+					)}
+				/>
+
+				<Autocomplete
+					options={channels.filter(c => c.type === 0)}
+					getOptionLabel={(option) => option.name}
+					getOptionKey={(option => option.id)}
+					value={channels.find(c => c.id === dirtyConfig.errorsChannelId) || null}
+					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, errorsChannelId: val?.id || '' }))}
+					sx={{ mb: 2 }}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							label="Канал ошибок"
+							error={!dirtyConfig.errorsChannelId}
 						/>
 					)}
 				/>

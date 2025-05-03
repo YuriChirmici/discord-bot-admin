@@ -1,9 +1,9 @@
 import { Container, Toolbar } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
-import { Settings } from './Settings';
-import { General } from './General';
-import { ConfigJSON } from './ConfigJSON';
-import { TempVoice } from './TempVoice';
+import { Settings } from './sections/Settings';
+import { General } from './sections/General';
+import { ConfigJSON } from './sections/ConfigJSON';
+import { TempVoice } from './sections/temp-voice/TempVoice';
 
 interface Props {}
 export const Content: React.FC<Props> = () => {

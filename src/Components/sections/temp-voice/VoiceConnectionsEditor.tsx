@@ -1,8 +1,8 @@
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppStore } from '../store/useAppStore';
-import { TConfig } from '../schemas/config/config';
+import { useAppStore } from '../../../store/useAppStore';
+import { TConfig } from '../../../schemas/config/config';
 
 interface VoiceConnection {
 	channelId: string;
@@ -66,13 +66,9 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 						<Autocomplete
 							options={voiceChannels.filter(c => c.id === conn.channelId || !voiceConnections.find(v => v.channelId === c.id))}
 							getOptionLabel={(option) => option.name}
+							getOptionKey={(option => option.id)}
 							value={selectedChannel}
-							onChange={(_, newValue) => {
-								handleUpdate(conn.channelId, {
-									...conn,
-									channelId: newValue?.id || '',
-								});
-							}}
+							onChange={(_, newValue) => handleUpdate(conn.channelId, { ...conn, channelId: newValue?.id || '' })}
 							sx={{ flex: 1 }}
 							renderInput={(params) => (
 								<TextField
@@ -86,13 +82,9 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 						<Autocomplete
 							options={categoryChannels}
 							getOptionLabel={(option) => option.name}
+							getOptionKey={(option => option.id)}
 							value={selectedCategory}
-							onChange={(_, newValue) => {
-								handleUpdate(conn.channelId, {
-									...conn,
-									categoryId: newValue?.id || '',
-								});
-							}}
+							onChange={(_, newValue) => handleUpdate(conn.channelId, { ...conn, categoryId: newValue?.id || '' })}
 							sx={{ flex: 1 }}
 							renderInput={(params) => (
 								<TextField

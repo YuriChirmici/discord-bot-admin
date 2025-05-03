@@ -4,9 +4,7 @@ import { setConfig } from '../api/config';
 import { useAppStore } from '../store/useAppStore';
 import { useAlertStore } from '../store/useAlertStore';
 
-interface Props {
-	className?: string;
-}
+interface Props {}
 
 export const ConfigFileUpload: React.FC<Props> = () => {
 	const { setAppData, setLoading } = useAppStore();

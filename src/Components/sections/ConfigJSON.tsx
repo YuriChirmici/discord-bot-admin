@@ -3,14 +3,14 @@ import {
 	Button,
 	Typography,
 } from '@mui/material';
-import { useAppStore } from '../store/useAppStore';
+import { useAppStore } from '../../store/useAppStore';
 import { useState } from 'react';
-import { setConfig } from '../api/config';
-import { configSchema, TConfig } from '../schemas/config/config';
+import { setConfig } from '../../api/config';
+import { configSchema, TConfig } from '../../schemas/config/config';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import { useThemeContext } from '../theme/ThemeContext';
-import { useAlertStore } from '../store/useAlertStore';
+import { useThemeContext } from '../../theme/ThemeContext';
+import { useAlertStore } from '../../store/useAlertStore';
 
 interface Props { }
 export const ConfigJSON: React.FC<Props> = () => {

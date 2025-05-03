@@ -1,6 +1,6 @@
-import { BaseConfigPageLayout } from './BaseConfigPageLayout';
+import { BaseConfigPageLayout } from '../../BaseConfigPageLayout';
 import { VoiceConnectionsEditor } from './VoiceConnectionsEditor';
-import { TConfig } from '../schemas/config/config';
+import { TConfig } from '../../../schemas/config/config';
 
 interface Props {}
 export const TempVoice: React.FC<Props> = () => {
