@@ -1,6 +1,6 @@
 import { Client, ClientUser, Events, Guild } from 'discord.js';
 import { TConfig } from '../../../src/schemas/config/config';
-import { IChannel, IRole } from '../../../src/store/app-store-types';
+import { IChannel, IRole } from '../../../src/store/types/app-store-types';
 
 class ClientService {
 	client: Client | null = null;

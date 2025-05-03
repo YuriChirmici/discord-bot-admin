@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { TConfig, TLocalConfig } from '../schemas/config/config';
-import { IAppData, IChannel, IRole } from './app-store-types';
+import { IAppData, IChannel, IRole } from './types/app-store-types';
 
 interface AppState {
 	config: TConfig | null;

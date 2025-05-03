@@ -10,12 +10,14 @@ import { configSchema, TConfig } from '../schemas/config/config';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { useThemeContext } from '../theme/ThemeContext';
+import { useAlertStore } from '../store/useAlertStore';
 
 interface Props { }
 export const ConfigJSON: React.FC<Props> = () => {
 	const { config, setLoading, setAppData } = useAppStore();
 	const [ dirtyConfig, setDirtyConfig ] = useState<string>(JSON.stringify(config!, null, 2));
 	const { isDark } = useThemeContext();
+	const { showAlert } = useAlertStore();
 
 	const handleSave = async () => {
 		try {
@@ -24,7 +26,7 @@ export const ConfigJSON: React.FC<Props> = () => {
 			const newConfig = await setConfig(parsedConfig);
 			setAppData(newConfig);
 		} catch (err) {
-			alert(err);
+			showAlert((err instanceof Error ? err.message : ''), 'error');
 		} finally {
 			setLoading(false);
 		}
@@ -35,7 +37,7 @@ export const ConfigJSON: React.FC<Props> = () => {
 			const configObj: TConfig = JSON.parse(config);
 			configSchema.parse(configObj);
 		} catch (err) {
-			alert(err);
+			showAlert(err instanceof Error ? err.message : '', 'error');
 			throw err;
 		}
 	};

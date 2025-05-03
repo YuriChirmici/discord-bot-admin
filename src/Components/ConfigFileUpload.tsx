@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Button, Box } from '@mui/material';
 import { setConfig } from '../api/config';
 import { useAppStore } from '../store/useAppStore';
+import { useAlertStore } from '../store/useAlertStore';
 
 interface Props {
 	className?: string;
@@ -10,6 +11,7 @@ interface Props {
 export const ConfigFileUpload: React.FC<Props> = () => {
 	const { setAppData, setLoading } = useAppStore();
 	const fileInputRef = useRef<HTMLInputElement>(null);
+	const { showAlert } = useAlertStore();
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files ? event.target.files[0] : null;
@@ -26,7 +28,7 @@ export const ConfigFileUpload: React.FC<Props> = () => {
 				const newData = await setConfig(json);
 				setAppData(newData);
 			} catch (err) {
-				alert('Ошибка парсинга JSON: ' + (err instanceof Error ? err.message : ''));
+				showAlert(err instanceof Error ? err.message : '', 'error');
 			} finally {
 				setLoading(false);
 				if (fileInputRef.current) {

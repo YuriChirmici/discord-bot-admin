@@ -1,4 +1,4 @@
-import { TConfig, TLocalConfig } from '../schemas/config/config';
+import { TConfig, TLocalConfig } from '../../schemas/config/config';
 
 export interface IRole {
 	id: string;

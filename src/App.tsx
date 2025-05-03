@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 import { Menu } from './components/Menu';
 import { Provider } from './components/Provider';
 import { Content } from './components/Content';
@@ -6,9 +6,8 @@ import { useAppStore } from './store/useAppStore';
 import { useMenu } from './hooks/useMenu';
 import { useEffect } from 'react';
 import { PageLoading } from './components/PageLoading';
-import { IAppData } from './store/app-store-types';
+import { IAppData } from './store/types/app-store-types';
 import { AppToolbar } from './components/Toolbar';
-import { FullscreenLoader } from './components/OverlayLoader';
 
 export default function App() {
 	const { serverReady, setServerReady, config, setAppData } = useAppStore();
@@ -33,8 +32,6 @@ export default function App() {
 	return (
 		<Provider>
 			<Box sx={{ display: 'flex' }}>
-				<CssBaseline />
-
 				<AppToolbar />
 
 				<Menu sections={sections} />
@@ -42,8 +39,6 @@ export default function App() {
 				<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 					<Content />
 				</Box>
-
-				<FullscreenLoader />
 			</Box>
 		</Provider>
 	);

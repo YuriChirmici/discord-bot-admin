@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron';
-import { IAppData, TDiscordData } from '../../../src/store/app-store-types';
+import { IAppData, TDiscordData } from '../../../src/store/types/app-store-types';
 import { localConfigService } from '../local-config/service';
 import { discordClientService } from '../discord-client/service';
 import { app, BrowserWindow } from 'electron';

@@ -13,6 +13,7 @@ import { useThemeContext } from '../theme/ThemeContext';
 import { useAppStore } from '../store/useAppStore';
 import PasswordInput from './ui/PasswordInput';
 import { refreshDiscordCache, setLocalConfig } from '../api/config';
+import { useAlertStore } from '../store/useAlertStore';
 
 interface Props {}
 export const Settings: React.FC<Props> = () => {
@@ -20,6 +21,7 @@ export const Settings: React.FC<Props> = () => {
 	const { toggleTheme, isDark } = useThemeContext();
 	const { localConfig, setLoading, setAppData } = useAppStore();
 	const [ connectionString, setConnectionString ] = useState(localConfig?.database?.connectionLink || '');
+	const { showAlert } = useAlertStore();
 
 	useEffect(() => {
 		window.ipcRenderer.invoke('get-app-version').then(setVersion);
@@ -30,11 +32,10 @@ export const Settings: React.FC<Props> = () => {
 			setLoading(true);
 			const result = await window.ipcRenderer.invoke('check-for-updates');
 			setLoading(false);
-
-			setTimeout(() => alert(result.message), 10);
+			showAlert(result.message);
 		} catch (error) {
 			console.error(error);
-			alert('Ошибка при проверке обновлений.');
+			showAlert('Ошибка при проверке обновлений.');
 		}
 	};
 
@@ -50,7 +51,7 @@ export const Settings: React.FC<Props> = () => {
 			});
 			setAppData(newConfig);
 		} catch (err) {
-			alert(err);
+			showAlert((err instanceof Error ? err.message : ''), 'error');
 		} finally {
 			setLoading(false);
 		}
@@ -65,7 +66,7 @@ export const Settings: React.FC<Props> = () => {
 
 		} catch (err) {
 			console.error(err);
-			alert('Ошибка при обновлении кэша дискорда.');
+			showAlert('Ошибка при обновлении кэша дискорда.');
 		}
 	};
 

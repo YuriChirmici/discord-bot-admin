@@ -79,7 +79,6 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 									{...params}
 									label="Создающий канал"
 									error={!conn.channelId}
-									helperText={!conn.channelId ? 'Обязательное поле' : ''}
 								/>
 							)}
 						/>
@@ -100,7 +99,6 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 									{...params}
 									label="Вкладка"
 									error={!conn.categoryId}
-									helperText={!conn.categoryId ? 'Обязательное поле' : ''}
 								/>
 							)}
 						/>
@@ -111,7 +109,6 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 							onChange={(e) => handleUpdate(conn.channelId, { ...conn, channelName: e.target.value })}
 							sx={{ flex: 1 }}
 							error={!conn.channelName}
-							helperText={!conn.channelName ? 'Обязательное поле' : ''}
 						/>
 
 						<IconButton onClick={() => handleRemove(conn.channelId)} color="error">

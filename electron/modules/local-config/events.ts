@@ -2,7 +2,7 @@ import { ipcMain } from 'electron';
 import { localConfigService } from './service';
 import { TConfig } from '../../../src/schemas/config/config';
 import { appDataService } from '../app-module/service';
-import { IAppData } from '../../../src/store/app-store-types';
+import { IAppData } from '../../../src/store/types/app-store-types';
 
 // ipcMain.handle('get-local-config', async () => {
 // 	const config = await localConfigService.getLocalConfig();

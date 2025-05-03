@@ -4,15 +4,15 @@ import { TConfig } from '../schemas/config/config';
 
 interface Props {}
 export const TempVoice: React.FC<Props> = () => {
+
 	const validate = (dirtyConfig: TConfig) => {
 		const voiceConnections = dirtyConfig.voiceConnections || [];
 		const missingFields = voiceConnections.find((c) => !c.channelId || !c.categoryId || !c.channelName);
 		if (missingFields) {
-			alert('Заполните все поля');
-			return false;
+			return { isValid: false, validationError: 'Заполните все поля' };
 		}
 
-		return true;
+		return { isValid: true };
 	};
 
 	return (

@@ -3,21 +3,31 @@ import { useAppStore } from '../store/useAppStore';
 import { useState } from 'react';
 import { setConfig } from '../api/config';
 import { TConfig } from '../schemas/config/config';
+import { useAlertStore } from '../store/useAlertStore';
 
 interface Props {
 	children: (dirtyConfig: TConfig, setDirtyConfig: (config: TConfig) => void) => React.ReactNode;
-	validate?: (config: TConfig) => void;
+	validate?: (config: TConfig) => { validationError?: string, isValid: boolean };
 	sx?: React.CSSProperties;
 }
 
 export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }) => {
 	const { config, setLoading, setAppData } = useAppStore();
 	const [ dirtyConfig, setDirtyConfig ] = useState<TConfig>(config!);
+	const { showAlert } = useAlertStore();
 
 	const handleSave = async () => {
 		try {
-			const isValid = !validate || validate(dirtyConfig);
-			if (!isValid) {
+			if (!validate) {
+				return;
+			}
+
+			const validationResult = validate(dirtyConfig);
+			if (!validationResult.isValid) {
+				if (validationResult.validationError) {
+					showAlert(validationResult.validationError, 'error');
+				}
+
 				return;
 			}
 
@@ -26,7 +36,7 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }
 			setAppData(newConfig);
 		} catch (err) {
 			console.error(err);
-			alert(err);
+			showAlert(err instanceof Error ? err.message : 'Неизвестная ошибка', 'error');
 		} finally {
 			setLoading(false);
 		}

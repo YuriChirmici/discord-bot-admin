@@ -1,5 +1,5 @@
 import { TConfig, TLocalConfig } from '../schemas/config/config';
-import { IAppData } from '../store/app-store-types';
+import { IAppData } from '../store/types/app-store-types';
 
 // export const getConfig = async (): Promise<TConfig> => {
 // 	const config = await window.ipcRenderer.invoke('get-config');
