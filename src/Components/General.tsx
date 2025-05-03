@@ -45,14 +45,6 @@ export const General: React.FC<Props> = () => {
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, botMemberId: e.target.value }))}
 					sx={{ mb: 2 }}
 				/>
-
-				<PasswordInput
-					label="Строка подключения к БД"
-					fullWidth
-					value={dirtyConfig.database.connectionLink}
-					onValueChange={(connectionLink) => setDirtyConfig(({ ...dirtyConfig, database: { ...dirtyConfig.database, connectionLink } }))}
-					sx={{ mb: 2 }}
-				/>
 			</>)}
 		</BaseConfigPageLayout>
 	);

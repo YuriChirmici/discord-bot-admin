@@ -16,7 +16,7 @@ export const TempVoice: React.FC<Props> = () => {
 	};
 
 	return (
-		<BaseConfigPageLayout maxWidth={1100} validate={validate}>
+		<BaseConfigPageLayout sx={{ maxWidth: 1100 }} validate={validate}>
 			{(dirtyConfig, setDirtyConfig) => (
 				<>
 					<VoiceConnectionsEditor config={dirtyConfig} onChange={(voiceConnections) => setDirtyConfig(({ ...dirtyConfig, voiceConnections }))} />

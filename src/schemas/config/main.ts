@@ -1,18 +1,18 @@
 import { z } from 'zod';
 
 export const mainConfigSchema = z.object({
-	token: z.string(),
-	clientId: z.string(),
-	guildId: z.string(),
-	botMemberId: z.string(),
+	token: z.string().min(1),
+	clientId: z.string().min(1),
+	guildId: z.string().min(1),
+	botMemberId: z.string().min(1),
 
 	database: z.object({
-		connectionLink: z.string(),
+		connectionLink: z.string().min(1),
 	}),
 
-	commandsPermission: z.string(),
+	commandsPermission: z.string().min(1),
 
-	voiceConnections: z.array(
+	voiceConnections: z.array( // async
 		z.object({
 			channelId: z.string().min(1),
 			categoryId: z.string().min(1),
@@ -20,23 +20,23 @@ export const mainConfigSchema = z.object({
 		})
 	),
 
-	errorsChannelId: z.string(),
+	errorsChannelId: z.string().min(1),
 
 	deletedMessagesLogging: z.object({
-		channelId: z.string(),
+		channelId: z.string().min(1),
 		channelExceptions: z.array(z.string()),
 		rolesExceptions: z.array(z.string()),
 		savedFileMaxSizeMB: z.number(),
 		savedFolderMaxSizeMB: z.number(),
 	}),
 
-	sheetMembersChannelId: z.string(),
-	sheetValidationCode: z.string(),
+	sheetMembersChannelId: z.string().min(1),
+	sheetValidationCode: z.string().min(1),
 
 	regiments: z.array(
 		z.object({
 			id: z.number(),
-			name: z.string(),
+			name: z.string().min(1),
 			sheetLetter: z.string().length(1),
 			shortName: z.string().optional(),
 			shouldUpdateRatingRoles: z.boolean().optional(),
@@ -50,7 +50,7 @@ export const mainConfigSchema = z.object({
 	gameTracking: z.object({
 		trackingChannels: z.array(z.string()),
 		trackingRoles: z.array(z.string()),
-		resultChannelId: z.string(),
-		replayFetchCookie: z.string(),
+		resultChannelId: z.string().min(1),
+		replayFetchCookie: z.string().optional(),
 	}),
 });

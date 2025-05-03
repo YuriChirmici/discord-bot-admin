@@ -12,7 +12,7 @@ const ratingRolesSchema = z.object({
 				rolesAdd: z.array(z.string()),
 			})
 		),
-		resultChannelId: z.string(),
+		resultChannelId: z.string().min(1),
 	}),
 });
 
@@ -23,3 +23,12 @@ export const configSchema = z.object({})
 	.merge(memberCommandsSchema);
 
 export type TConfig = z.infer<typeof configSchema>;
+
+export const localConfigSchema = z.object({
+	database: z.object({
+		connectionLink: z.string().min(1),
+	}),
+});
+
+export type TLocalConfig = z.infer<typeof localConfigSchema>;
+

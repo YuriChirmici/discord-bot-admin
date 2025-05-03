@@ -10,7 +10,7 @@ interface IUseMenu {
 }
 
 export const useMenu = (config: TConfig | null): IUseMenu => {
-	const configInitialized = config?.clientId !== null;
+	const configInitialized = !!config?.clientId;
 
 	const sections = [
 		...(

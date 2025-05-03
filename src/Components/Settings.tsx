@@ -9,14 +9,17 @@ import {
 	FormGroup
 } from '@mui/material';
 import { useThemeContext } from '../theme/ThemeContext';
-import { ConfigFileUpload } from './ConfigFileUpload';
+// import { ConfigFileUpload } from './ConfigFileUpload';
 import { useAppStore } from '../store/useAppStore';
+import PasswordInput from './ui/PasswordInput';
+import { setLocalConfig } from '../api/config';
 
 interface Props {}
 export const Settings: React.FC<Props> = () => {
 	const [ version, setVersion ] = useState('');
 	const { toggleTheme, isDark } = useThemeContext();
-	const { setLoading } = useAppStore();
+	const { localConfig, setLoading, setAppData } = useAppStore();
+	const [ connectionString, setConnectionString ] = useState(localConfig?.database?.connectionLink || '');
 
 	useEffect(() => {
 		window.ipcRenderer.invoke('get-app-version').then(setVersion);
@@ -35,14 +38,32 @@ export const Settings: React.FC<Props> = () => {
 		}
 	};
 
+	const handleSave = async () => {
+		try {
+			setLoading(true);
+			const newConfig = await setLocalConfig({
+				...localConfig,
+				database: {
+					...localConfig?.database,
+					connectionLink: connectionString
+				}
+			});
+			setAppData(newConfig);
+		} catch (err) {
+			alert(err);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 20 }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
 			<Container maxWidth="sm">
 				<Typography variant="h4" gutterBottom>
 					Настройки
 				</Typography>
 
-				<ConfigFileUpload />
+				{/* <ConfigFileUpload /> */}
 
 				<Button variant="contained" onClick={handleCheckUpdates} sx={{ marginBottom: 2 }}>
 					Проверить обновления
@@ -55,8 +76,26 @@ export const Settings: React.FC<Props> = () => {
 					/>
 				</FormGroup>
 
+				<Box sx={{ marginTop: 5, marginBottom: 2 }}>
+					<Typography variant="h5" mb={2}>
+						Настройки базы данных
+					</Typography>
+
+					<PasswordInput
+						label="Ссылка подключения к БД"
+						fullWidth
+						value={connectionString}
+						onValueChange={(value) => setConnectionString(value)}
+						sx={{ mb: 2 }}
+					/>
+
+					<Button variant="contained" onClick={handleSave} sx={{ marginBottom: 2 }}>
+						Сохранить
+					</Button>
+				</Box>
+
 				{version && (
-					<Typography variant="body1" sx={{ marginTop: 2 }}>
+					<Typography variant="body1" sx={{ marginTop: 5 }}>
 						Версия приложения: {version}
 					</Typography>
 				)}

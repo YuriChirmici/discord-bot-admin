@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const attendanceAdSchema = z.object({
 	type: z.literal('attendance'),
-	name: z.string(),
+	name: z.string().min(1),
 	defaults: z.object({
 		timer: z.number().optional(),
 		channelId: z.string().optional(),
@@ -22,7 +22,7 @@ const attendanceAdSchema = z.object({
 		z.array(
 			z.object({
 				rolesAdd: z.array(z.string()),
-				emoji: z.string(),
+				emoji: z.string().min(1),
 				save: z.boolean().optional(),
 			})
 		)
@@ -31,9 +31,9 @@ const attendanceAdSchema = z.object({
 
 const rolesUsualAdSchema = z.object({
 	type: z.literal('rolesUsual'),
-	name: z.string(),
+	name: z.string().min(1),
 	multipleRoles: z.boolean().optional(),
-	resultChannelId: z.string(),
+	resultChannelId: z.string().min(1),
 	defaults: z.object({
 		channelId: z.string().optional(),
 		title: z.string().optional(),
@@ -53,7 +53,7 @@ const rolesUsualAdSchema = z.object({
 
 const memberCommandsAdSchema = z.object({
 	type: z.literal('memberCommands'),
-	name: z.string(),
+	name: z.string().min(1),
 	defaults: z.object({
 		channelId: z.string().optional(),
 		title: z.string().optional(),
@@ -61,7 +61,7 @@ const memberCommandsAdSchema = z.object({
 		content: z.string().optional(),
 	}),
 	select: z.object({
-		placeholder: z.string(),
+		placeholder: z.string().optional(),
 	}),
 });
 

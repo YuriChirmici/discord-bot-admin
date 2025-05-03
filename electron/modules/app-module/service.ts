@@ -1,11 +1,12 @@
 import { ipcMain } from 'electron';
 import { IAppData } from '../../../src/store/app-store-types';
-import { configService } from '../config/service';
+import { localConfigService } from '../local-config/service';
 import { discordClientService } from '../discord-client/service';
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 import { filesDirname, RENDERER_DIST, VITE_DEV_SERVER_URL } from '../../global';
 import isDev from 'electron-is-dev';
+import { databaseService } from '../database/service';
 
 class AppDataService {
 	appDataPromise: Promise<IAppData> | null = null;
@@ -78,18 +79,22 @@ class AppDataService {
 	}
 
 	async initData(): Promise<IAppData> {
-		const config = await configService.getConfig();
-		if (!discordClientService.client && config?.token && config?.guildId) {
-			console.log('starting discord client');
-			await discordClientService.login(config);
-		}
+		const localConfig = await localConfigService.getLocalConfig();
+		await databaseService.connect(localConfig);
+
+		const config = await databaseService.getAppConfig();
+		await discordClientService.login(config);
 
 		const bot = discordClientService.bot;
-		const roles = await discordClientService.getRoles();
-		const channels = await discordClientService.getChannels();
+
+		const [	roles, channels ] = await Promise.all([
+			discordClientService.getRoles(),
+			discordClientService.getChannels(),
+		]);
 
 		return {
 			config,
+			localConfig,
 			roles,
 			channels: channels.filter(c => [ 0, 2, 4 ].includes(c.type)),
 			botInfo: bot && {

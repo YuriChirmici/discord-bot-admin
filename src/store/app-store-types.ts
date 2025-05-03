@@ -1,4 +1,4 @@
-import { TConfig } from '../schemas/config/config';
+import { TConfig, TLocalConfig } from '../schemas/config/config';
 
 export interface IRole {
 	id: string;
@@ -21,6 +21,7 @@ export interface IBotInfo {
 
 export interface IAppData {
 	config: TConfig | null;
+	localConfig: TLocalConfig | null;
 	roles: IRole[];
 	channels: IChannel[];
 	botInfo: IBotInfo | null;

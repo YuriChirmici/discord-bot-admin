@@ -22,9 +22,8 @@ export default defineConfig({
 						target: 'ES2020',
 						rollupOptions: {
 							external: [
-								'bufferutil',
-								'utf-8-validate',
-								'zlib-sync'
+								'discord.js',
+								'mongoose',
 							]
 						}
 					}

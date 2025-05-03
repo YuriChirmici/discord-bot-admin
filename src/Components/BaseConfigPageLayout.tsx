@@ -6,11 +6,11 @@ import { TConfig } from '../schemas/config/config';
 
 interface Props {
 	children: (dirtyConfig: TConfig, setDirtyConfig: (config: TConfig) => void) => React.ReactNode;
-	maxWidth?: number;
 	validate?: (config: TConfig) => void;
+	sx?: React.CSSProperties;
 }
 
-export const BaseConfigPageLayout: React.FC<Props> = ({ children, maxWidth = 600, validate }) => {
+export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }) => {
 	const { config, setLoading, setAppData } = useAppStore();
 	const [ dirtyConfig, setDirtyConfig ] = useState<TConfig>(config!);
 
@@ -33,10 +33,10 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, maxWidth = 600
 	};
 
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column', maxWidth, mx: 'auto', p: 2 }}>
+		<Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: 600, mx: 'auto', p: 2, ...(sx || {}) }}>
 			{children(dirtyConfig, setDirtyConfig)}
 
-			<Box sx={{ display: 'flex', mt: 3 }}>
+			<Box sx={{ display: 'flex', mt: 2 }}>
 				<Button variant="contained" onClick={handleSave}>
 					Сохранить
 				</Button>

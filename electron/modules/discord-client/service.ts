@@ -4,10 +4,34 @@ import { IChannel, IRole } from '../../../src/store/app-store-types';
 
 class ClientService {
 	client: Client | null = null;
+	currentClientId: string | null = null;
 	guild: Guild | null = null;
 	bot: ClientUser | null = null;
 
-	async login(config: TConfig) {
+	async login(config: TConfig | null) {
+		if (!config) {
+			return;
+		}
+
+		const { token, clientId } = config;
+
+		if (!token || !clientId) {
+			console.warn('Missing token or clientId');
+			return;
+		}
+
+		if (this.client && this.currentClientId === clientId) {
+			console.log('Discord client already connected');
+			return;
+		}
+
+		if (this.client) {
+			console.log('Disconnecting previous Discord client');
+			this.client.destroy();
+			this.client = null;
+		}
+
+		console.log('starting discord client');
 		await this._createClient(config);
 	}
 
@@ -19,6 +43,7 @@ class ClientService {
 
 			client.once(Events.ClientReady, async (readyClient) => {
 				console.log(`Discord bot connected! Logged in as ${readyClient.user.tag}`);
+				this.currentClientId = config.clientId;
 				this.bot = readyClient.user;
 				this.guild = await client.guilds.fetch(config.guildId);
 				resolve();

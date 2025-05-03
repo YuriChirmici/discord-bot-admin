@@ -23,7 +23,7 @@ const buttonSchema = z.object({
 const selectOptionSchema = z.object({
 	next: z.string().optional(),
 	isDefault: z.boolean().optional(),
-	text: z.string(),
+	text: z.string().min(1),
 	emoji: z.string().optional(),
 	description: z.string().optional(),
 	rolesAdd: z.array(z.string()).optional(),
@@ -36,7 +36,7 @@ const selectOptionSchema = z.object({
 const modalItemSchema = z.object({
 	key: z.string().optional(),
 	style: z.number().optional(),
-	label: z.string(),
+	label: z.string().min(1),
 	resultText: z.string().optional(),
 	min: z.number().optional(),
 	max: z.number().optional(),
@@ -47,7 +47,7 @@ const modalItemSchema = z.object({
 });
 
 const modalSchema = z.object({
-	title: z.string(),
+	title: z.string().min(1),
 	items: z.array(modalItemSchema),
 });
 
@@ -59,11 +59,11 @@ const selectSchema = z.object({
 });
 
 const questionSchema = z.object({
-	id: z.string(),
+	id: z.string().min(1),
 	isStart: z.boolean().optional(),
 	hideInResult: z.boolean().optional(),
 	isSubmit: z.boolean().optional(),
-	text: z.string(),
+	text: z.string().min(1),
 	next: z.string().optional(),
 	skipAnswer: z.boolean().optional(),
 	withTextAnswer: z.boolean().optional(),
@@ -75,7 +75,7 @@ const questionSchema = z.object({
 });
 
 const baseCommandSchema = z.object({
-	name: z.string(),
+	name: z.string().min(1),
 	hideInAd: z.boolean().optional(),
 	optionData: baseOptionData.optional(),
 });
@@ -86,7 +86,7 @@ const formCommand = baseCommandSchema.extend({
 	channelName: z.string(),
 	initialRoles: z.array(z.string()),
 	resultHeader: z.string(),
-	resultChannelId: z.string(),
+	resultChannelId: z.string().min(1),
 	kickExceptionRoles: z.array(z.string()),
 	questions: z.array(questionSchema),
 });
@@ -94,9 +94,9 @@ const formCommand = baseCommandSchema.extend({
 const modalCommand = baseCommandSchema.extend({
 	type: z.literal('modal'),
 	parentChannelId: z.string().optional(),
-	resultHeader: z.string(),
-	resultChannelId: z.string(),
-	userReplyResult: z.string(),
+	resultHeader: z.string().min(1),
+	resultChannelId: z.string().min(1),
+	userReplyResult: z.string().min(1),
 	vacationRoles: z.array(z.string()),
 	modal: modalSchema,
 });
