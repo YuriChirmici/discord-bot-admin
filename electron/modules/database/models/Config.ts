@@ -2,12 +2,16 @@ import mongoose, { Document, Model } from 'mongoose';
 import { TConfig } from '../../../../src/schemas/config/config';
 
 interface IConfig extends Document {
+	type: string;
 	config: TConfig;
+	source: 'bot' | 'admin-gui';
 }
 
 const ConfigSchema = new mongoose.Schema<IConfig>(
 	{
-		config: { type: Object, required: true },
+		type: String,
+		config: Object,
+		source: String,
 	},
 	{ timestamps: true }
 );

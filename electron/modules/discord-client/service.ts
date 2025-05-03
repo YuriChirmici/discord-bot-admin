@@ -8,7 +8,7 @@ class ClientService {
 	guild: Guild | null = null;
 	bot: ClientUser | null = null;
 
-	async login(config: TConfig | null) {
+	async login(config: TConfig | null): Promise<{ newInit: boolean } | void> {
 		if (!config) {
 			return;
 		}
@@ -33,6 +33,8 @@ class ClientService {
 
 		console.log('starting discord client');
 		await this._createClient(config);
+
+		return { newInit: true };
 	}
 
 	_createClient(config: TConfig): Promise<void> {

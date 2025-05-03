@@ -13,3 +13,7 @@ export const setConfig = async (config: TConfig): Promise<IAppData> => {
 export const setLocalConfig = async (config: TLocalConfig): Promise<IAppData> => {
 	return await window.ipcRenderer.invoke('set-local-config', config);
 };
+
+export const refreshDiscordCache = async (): Promise<IAppData> => {
+	return await window.ipcRenderer.invoke('refresh-discord-cache');
+};

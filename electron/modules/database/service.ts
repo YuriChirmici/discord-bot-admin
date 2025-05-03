@@ -53,7 +53,13 @@ class DatabaseService {
 			throw new Error('Database is not connected');
 		}
 
-		await ConfigModel.updateOne({ type: this.constants.APP_CONFIG }, { config }).exec();
+		await ConfigModel.updateOne(
+			{ type: this.constants.APP_CONFIG },
+			{
+				config,
+				source: 'admin-gui',
+			}
+		).exec();
 	}
 }
 

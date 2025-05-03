@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron';
-import { IAppData } from '../../../src/store/app-store-types';
+import { IAppData, TDiscordData } from '../../../src/store/app-store-types';
 import { localConfigService } from '../local-config/service';
 import { discordClientService } from '../discord-client/service';
 import { app, BrowserWindow } from 'electron';
@@ -14,7 +14,7 @@ class AppDataService {
 	win: BrowserWindow | null = null;
 
 	constructor() {
-		this.appDataPromise = this.initData();
+		this.appDataPromise = this.initData(false);
 	}
 
 	createWindow(): BrowserWindow {
@@ -74,34 +74,64 @@ class AppDataService {
 	}
 
 	async reinitData() {
-		this.appDataPromise = this.initData();
+		this.appDataPromise = this.initData(true);
 		return await this.appDataPromise;
 	}
 
-	async initData(): Promise<IAppData> {
+	async initData(isReinit: boolean): Promise<IAppData> {
 		const localConfig = await localConfigService.getLocalConfig();
 		await databaseService.connect(localConfig);
 
 		const config = await databaseService.getAppConfig();
-		await discordClientService.login(config);
+		const discordLoginResult = await discordClientService.login(config);
 
 		const bot = discordClientService.bot;
 
-		const [	roles, channels ] = await Promise.all([
-			discordClientService.getRoles(),
-			discordClientService.getChannels(),
-		]);
+		let discordData: TDiscordData | null = null;
+		if (isReinit && !discordLoginResult?.newInit && this.appData?.botInfo) { // use cache for optimization
+			console.log('get discord config from cache');
+			discordData = this.getDiscordCachedData();
+		} else {
+			console.log('fetch discord config');
+			discordData = {
+				roles: await discordClientService.getRoles(),
+				channels: (await discordClientService.getChannels()).filter(c => [ 0, 2, 4 ].includes(c.type)),
+				botInfo: bot && {
+					id: bot.id,
+					tag: bot.tag,
+				}
+			};
+		}
 
-		return {
+		this.appData = {
 			config,
 			localConfig,
-			roles,
-			channels: channels.filter(c => [ 0, 2, 4 ].includes(c.type)),
-			botInfo: bot && {
-				id: bot.id,
-				tag: bot.tag,
-			}
+			...discordData,
 		};
+
+		return this.appData;
+	}
+
+	getDiscordCachedData(): TDiscordData {
+		const appData = this.appData!;
+
+		const data = {
+			roles: appData.roles,
+			channels: appData.channels,
+			botInfo: appData.botInfo,
+		};
+
+		return data;
+	}
+
+	async refetchDiscordData() {
+		const appData = this.appData!;
+
+		appData.botInfo = null;
+		appData.channels = [];
+		appData.roles = [];
+
+		return await this.reinitData();
 	}
 }
 

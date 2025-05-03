@@ -26,3 +26,5 @@ export interface IAppData {
 	channels: IChannel[];
 	botInfo: IBotInfo | null;
 }
+
+export type TDiscordData = Pick<IAppData, 'roles' | 'channels' | 'botInfo'>;

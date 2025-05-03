@@ -51,6 +51,5 @@ export const mainConfigSchema = z.object({
 		trackingChannels: z.array(z.string()),
 		trackingRoles: z.array(z.string()),
 		resultChannelId: z.string().min(1),
-		replayFetchCookie: z.string().optional(),
 	}),
 });

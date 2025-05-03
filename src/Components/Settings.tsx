@@ -12,7 +12,7 @@ import { useThemeContext } from '../theme/ThemeContext';
 // import { ConfigFileUpload } from './ConfigFileUpload';
 import { useAppStore } from '../store/useAppStore';
 import PasswordInput from './ui/PasswordInput';
-import { setLocalConfig } from '../api/config';
+import { refreshDiscordCache, setLocalConfig } from '../api/config';
 
 interface Props {}
 export const Settings: React.FC<Props> = () => {
@@ -56,6 +56,19 @@ export const Settings: React.FC<Props> = () => {
 		}
 	};
 
+	const handleRefreshDiscordCache = async () => {
+		try {
+			setLoading(true);
+			const newConfig = await refreshDiscordCache();
+			setAppData(newConfig);
+			setLoading(false);
+
+		} catch (err) {
+			console.error(err);
+			alert('Ошибка при обновлении кэша дискорда.');
+		}
+	};
+
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
 			<Container maxWidth="sm">
@@ -67,6 +80,12 @@ export const Settings: React.FC<Props> = () => {
 
 				<Button variant="contained" onClick={handleCheckUpdates} sx={{ marginBottom: 2 }}>
 					Проверить обновления
+				</Button>
+
+				<br/>
+
+				<Button variant="contained" onClick={handleRefreshDiscordCache} sx={{ marginBottom: 2 }}>
+					Обновить дискорд кэш
 				</Button>
 
 				<FormGroup>
