@@ -10,9 +10,9 @@ export const mainConfigSchema = z.object({
 		connectionLink: z.string().min(1),
 	}),
 
-	commandsPermission: z.string().min(1),
+	commandsPermission: z.string().min(1), // requires bot restart
 
-	voiceConnections: z.array( // async
+	voiceConnections: z.array(
 		z.object({
 			channelId: z.string().min(1),
 			categoryId: z.string().min(1),
