@@ -18,6 +18,7 @@ export const useMenu = (config: TConfig | null): IUseMenu => {
 				{ text: 'Основное', path: '/general' },
 				{ text: 'Temp Voice', path: '/temp-voice' },
 				{ text: 'Слоты', path: '/slots' },
+				{ text: 'Полки', path: '/regiments' },
 				{ text: 'JSON', path: '/config-json' },
 			] : []
 		),

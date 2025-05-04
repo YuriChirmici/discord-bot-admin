@@ -17,7 +17,7 @@ export const General: React.FC<Props> = () => {
 	const validate = (dirtyConfig: TConfig) => {
 		const { guildId, clientId, token, botMemberId, errorsChannelId, sheetMembersChannelId } = dirtyConfig;
 		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !sheetMembersChannelId || !permissionsFlags) {
-			return { isValid: false, validationError: 'Заполните все поля' };
+			return { isValid: false };
 		}
 
 		return { isValid: true };

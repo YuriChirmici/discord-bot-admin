@@ -20,6 +20,8 @@ class AppDataService {
 	createWindow(): BrowserWindow {
 		const win = new BrowserWindow({
 			icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+			width: 1280,
+			height: 720,
 			webPreferences: {
 				nodeIntegration: true,
 				preload: path.join(filesDirname, 'preload.mjs'),

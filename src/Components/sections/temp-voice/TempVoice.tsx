@@ -9,14 +9,14 @@ export const TempVoice: React.FC<Props> = () => {
 		const voiceConnections = dirtyConfig.voiceConnections || [];
 		const missingFields = voiceConnections.find((c) => !c.channelId || !c.categoryId || !c.channelName);
 		if (missingFields) {
-			return { isValid: false, validationError: 'Заполните все поля' };
+			return { isValid: false };
 		}
 
 		return { isValid: true };
 	};
 
 	return (
-		<BaseConfigPageLayout sx={{ maxWidth: 1100 }} validate={validate}>
+		<BaseConfigPageLayout sx={{ maxWidth: 900 }} validate={validate}>
 			{(dirtyConfig, setDirtyConfig) => (
 				<>
 					<VoiceConnectionsEditor config={dirtyConfig} onChange={(voiceConnections) => setDirtyConfig(({ ...dirtyConfig, voiceConnections }))} />

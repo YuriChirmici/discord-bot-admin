@@ -20,7 +20,7 @@ export const Slots: React.FC<Props> = () => {
 	const validate = (dirtyConfig: TConfig) => {
 		const { sheetMembersChannelId, sheetValidationCode } = dirtyConfig;
 		if (!sheetMembersChannelId || !sheetValidationCode) {
-			return { isValid: false, validationError: 'Заполните все поля' };
+			return { isValid: false };
 		}
 
 		return { isValid: true };

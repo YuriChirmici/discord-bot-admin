@@ -24,10 +24,7 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }
 
 			const validationResult = validate(dirtyConfig);
 			if (!validationResult.isValid) {
-				if (validationResult.validationError) {
-					showAlert(validationResult.validationError, 'error');
-				}
-
+				showAlert(validationResult.validationError || 'Заполните все поля', 'error');
 				return;
 			}
 
