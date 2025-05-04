@@ -6,6 +6,7 @@ import { ConfigJSON } from './sections/ConfigJSON';
 import { TempVoice } from './sections/temp-voice/TempVoice';
 import { Slots } from './sections/slots/Slots';
 import { Regiments } from './sections/regiments/Regiments';
+import { DeletedMessages } from './sections/DeletedMessages';
 
 interface Props {}
 export const Content: React.FC<Props> = () => {
@@ -20,6 +21,7 @@ export const Content: React.FC<Props> = () => {
 				<Route path="/temp-voice" element={<TempVoice />} />
 				<Route path="/slots" element={<Slots />} />
 				<Route path="/regiments" element={<Regiments />} />
+				<Route path="/deleted-messages" element={<DeletedMessages />} />
 			</Routes>
 		</Container>
 	);

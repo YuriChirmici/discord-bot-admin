@@ -62,7 +62,7 @@ export const VoiceConnectionsEditor: React.FC<Props> = ({ config, onChange }) =>
 				const selectedCategory = channels.find(c => c.id === conn.categoryId);
 
 				return (
-					<Box key={conn.channelId} sx={{ display: 'flex', gap: 2, mb: 2, alignItems: 'center' }}>
+					<Box key={conn.channelId} sx={{ display: 'flex', gap: 2, mb: 3, alignItems: 'center' }}>
 						<Autocomplete
 							options={voiceChannels.filter(c => c.id === conn.channelId || !voiceConnections.find(v => v.channelId === c.id))}
 							getOptionLabel={(option) => option.name}

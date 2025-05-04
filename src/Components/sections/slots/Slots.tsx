@@ -66,7 +66,7 @@ export const Slots: React.FC<Props> = () => {
 					getOptionKey={(option => option.id)}
 					value={channels.find(c => c.id === dirtyConfig.sheetMembersChannelId) || null}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, sheetMembersChannelId: val?.id || '' }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					renderInput={(params) => (
 						<TextField
 							{...params}
@@ -81,7 +81,7 @@ export const Slots: React.FC<Props> = () => {
 					fullWidth
 					value={dirtyConfig.sheetValidationCode}
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, sheetValidationCode: e.target.value }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					error={!dirtyConfig.sheetValidationCode}
 				/>
 			</>)}

@@ -43,7 +43,7 @@ export const General: React.FC<Props> = () => {
 					fullWidth
 					value={dirtyConfig.guildId}
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, guildId: e.target.value }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					error={!dirtyConfig.guildId}
 				/>
 
@@ -52,7 +52,7 @@ export const General: React.FC<Props> = () => {
 					fullWidth
 					value={dirtyConfig.clientId}
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, clientId: e.target.value }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					error={!dirtyConfig.clientId}
 				/>
 
@@ -61,7 +61,7 @@ export const General: React.FC<Props> = () => {
 					fullWidth
 					value={dirtyConfig.token}
 					onValueChange={(token) => setDirtyConfig(({ ...dirtyConfig, token }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					error={!dirtyConfig.token}
 				/>
 
@@ -70,7 +70,7 @@ export const General: React.FC<Props> = () => {
 					fullWidth
 					value={dirtyConfig.botMemberId}
 					onChange={(e) => setDirtyConfig(({ ...dirtyConfig, botMemberId: e.target.value }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					error={!dirtyConfig.botMemberId}
 				/>
 
@@ -78,7 +78,7 @@ export const General: React.FC<Props> = () => {
 					options={permissionsFlags}
 					value={dirtyConfig.commandsPermission}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, commandsPermission: val || '' }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					renderInput={(params) => (
 						<TextField
 							{...params}
@@ -94,7 +94,7 @@ export const General: React.FC<Props> = () => {
 					getOptionKey={(option => option.id)}
 					value={channels.find(c => c.id === dirtyConfig.errorsChannelId) || null}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, errorsChannelId: val?.id || '' }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					renderInput={(params) => (
 						<TextField
 							{...params}
@@ -110,7 +110,7 @@ export const General: React.FC<Props> = () => {
 					getOptionKey={(option => option.id)}
 					value={channels.find(c => c.id === dirtyConfig.sheetMembersChannelId) || null}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, sheetMembersChannelId: val?.id || '' }))}
-					sx={{ mb: 2 }}
+					sx={{ mb: 3 }}
 					renderInput={(params) => (
 						<TextField
 							{...params}

@@ -50,7 +50,7 @@ export const SlotUsersList: React.FC<Props> = ({ slots, handleDelete }) => {
 				fullWidth
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
-				sx={{ mb: 2 }}
+				sx={{ mb: 3 }}
 			/>
 
 			<Paper elevation={2}>

@@ -107,7 +107,7 @@ export const Settings: React.FC<Props> = () => {
 						fullWidth
 						value={connectionString}
 						onValueChange={(value) => setConnectionString(value)}
-						sx={{ mb: 2 }}
+						sx={{ mb: 3 }}
 					/>
 
 					<Button variant="contained" onClick={handleSave} sx={{ marginBottom: 2 }}>
