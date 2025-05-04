@@ -79,10 +79,15 @@ class ClientService {
 			return [];
 		}
 
-		const channelsMap = await this.guild.channels.fetch();
-		const channels = Array.from(channelsMap.values());
+		const [ channelsMap, activeThreadsMap ] = await Promise.all([
+			this.guild.channels.fetch(),
+			this.guild.channels.fetchActiveThreads(),
+		]);
 
-		return channels
+		const channels = Array.from(channelsMap.values());
+		const activeThreads = Array.from(activeThreadsMap.threads.values());
+
+		const resultChannels = channels
 			.map((channel) => {
 				if (!channel) {
 					return null;
@@ -92,9 +97,21 @@ class ClientService {
 					id: channel.id,
 					name: channel.name,
 					type: channel.type,
+					parentId: channel.parentId,
 				};
 			})
 			.filter((c): c is IChannel => c !== null);
+
+		for (const thread of activeThreads) {
+			resultChannels.push({
+				id: thread.id,
+				name: thread.name,
+				type: 0,
+				parentId: thread.parentId,
+			});
+		}
+
+		return resultChannels;
 	}
 
 	async getMembers(): Promise<IMember[]> {

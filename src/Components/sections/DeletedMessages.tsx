@@ -73,7 +73,7 @@ export const DeletedMessages: React.FC<Props> = () => {
 					</Typography>
 
 					<Autocomplete
-						options={channels}
+						options={channels.filter(c => c.type === 0)}
 						getOptionLabel={(option) => option.name}
 						getOptionKey={(option => option.id)}
 						value={channels.find(c => c.id === messagesConfig.channelId) || null}

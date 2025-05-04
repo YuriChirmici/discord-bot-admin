@@ -9,6 +9,7 @@ export interface IChannel {
 	id: string;
 	name: string;
 	type: 0 | 2 | 4;
+	parentId: string | null;
 }
 // 0 - Text
 // 2 - Voice

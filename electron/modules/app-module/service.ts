@@ -22,6 +22,7 @@ class AppDataService {
 			icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
 			width: 1280,
 			height: 720,
+			backgroundColor: '#121212',
 			webPreferences: {
 				nodeIntegration: true,
 				preload: path.join(filesDirname, 'preload.mjs'),
