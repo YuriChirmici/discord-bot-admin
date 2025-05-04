@@ -34,6 +34,7 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }
 			setLoading(true);
 			const newConfig = await setConfig(dirtyConfig);
 			setAppData(newConfig);
+			showAlert('Настройки успешно сохранены', 'success');
 		} catch (err) {
 			console.error(err);
 			showAlert(err instanceof Error ? err.message : 'Неизвестная ошибка', 'error');

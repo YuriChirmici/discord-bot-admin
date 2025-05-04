@@ -50,6 +50,7 @@ export const Settings: React.FC<Props> = () => {
 				}
 			});
 			setAppData(newConfig);
+			showAlert('Настройки успешно сохранены', 'success');
 		} catch (err) {
 			showAlert((err instanceof Error ? err.message : ''), 'error');
 		} finally {
