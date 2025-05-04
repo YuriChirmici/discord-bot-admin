@@ -1,6 +1,6 @@
-import { Client, ClientUser, Events, Guild } from 'discord.js';
+import { Client, ClientUser, Events, GatewayIntentBits, Guild } from 'discord.js';
 import { TConfig } from '../../../src/schemas/config/config';
-import { IChannel, IRole } from '../../../src/store/types/app-store-types';
+import { IChannel, IMember, IRole } from '../../../src/store/types/app-store-types';
 
 class ClientService {
 	client: Client | null = null;
@@ -40,7 +40,11 @@ class ClientService {
 	_createClient(config: TConfig): Promise<void> {
 		return new Promise((resolve) => {
 			const client = new Client({
-				intents: [],
+				intents: [
+					GatewayIntentBits.Guilds,
+					GatewayIntentBits.GuildMembers,
+					GatewayIntentBits.GuildMessages,
+				],
 			});
 
 			client.once(Events.ClientReady, async (readyClient) => {
@@ -91,6 +95,22 @@ class ClientService {
 				};
 			})
 			.filter((c): c is IChannel => c !== null);
+	}
+
+	async getMembers(): Promise<IMember[]> {
+		if (!this.guild) {
+			return [];
+		}
+
+		const membersMap = await this.guild.members.fetch();
+		const members = Array.from(membersMap.values());
+
+		return members.map(member => ({
+			id: member.id,
+			name: member.user.username,
+			tag: member.user.tag,
+			// roles: member.roles.cache.map(role => role.id),
+		}));
 	}
 }
 

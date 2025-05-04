@@ -19,12 +19,20 @@ export interface IBotInfo {
 	tag: string;
 }
 
+export interface IMember {
+	id: string;
+	name: string;
+	tag: string;
+	// roles?: string[];
+}
+
 export interface IAppData {
 	config: TConfig | null;
 	localConfig: TLocalConfig | null;
 	roles: IRole[];
 	channels: IChannel[];
+	members: IMember[];
 	botInfo: IBotInfo | null;
 }
 
-export type TDiscordData = Pick<IAppData, 'roles' | 'channels' | 'botInfo'>;
+export type TDiscordData = Pick<IAppData, 'roles' | 'channels' | 'members' | 'botInfo'>;

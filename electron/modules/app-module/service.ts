@@ -96,6 +96,7 @@ class AppDataService {
 			discordData = {
 				roles: await discordClientService.getRoles(),
 				channels: (await discordClientService.getChannels()).filter(c => [ 0, 2, 4 ].includes(c.type)),
+				members: await discordClientService.getMembers(),
 				botInfo: bot && {
 					id: bot.id,
 					tag: bot.tag,
@@ -119,6 +120,7 @@ class AppDataService {
 			roles: appData.roles,
 			channels: appData.channels,
 			botInfo: appData.botInfo,
+			members: appData.members,
 		};
 
 		return data;

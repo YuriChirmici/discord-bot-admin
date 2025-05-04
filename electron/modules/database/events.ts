@@ -18,10 +18,21 @@ ipcMain.handle('set-config', async (_event, config: TConfig) => {
 ipcMain.handle('get-users-slots', async (): Promise<ISlot[]> => {
 	const slots = await SlotModel.find({ memberId: { $exists: true, $ne: '' } }).sort({ serialNumber: 1 }).lean();
 
-	return slots.map((slot) => ({
+	const filteredSlots = slots.map((slot): ISlot => ({
 		serialNumber: slot.serialNumber,
 		memberId: slot.memberId,
 	}));
+
+	const members = appDataService.appData?.members || [];
+
+	filteredSlots.forEach((slot) => {
+		const member = members.find((member) => member.id === slot.memberId);
+		if (member) {
+			slot.memberName = member.name;
+		}
+	});
+
+	return filteredSlots;
 });
 
 interface IClearSlotData {

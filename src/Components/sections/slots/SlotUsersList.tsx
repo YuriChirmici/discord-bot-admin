@@ -66,7 +66,7 @@ export const SlotUsersList: React.FC<Props> = ({ slots, handleDelete }) => {
 							divider
 						>
 							<ListItemText
-								primary={`${slot.serialNumber}: ${slot.memberId}`}
+								primary={`${slot.serialNumber}: ${slot.memberName || ''} (${slot.memberId})`}
 							/>
 						</ListItem>
 					))}
