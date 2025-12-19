@@ -17,6 +17,8 @@ export const mainConfigSchema = z.object({
 			channelId: z.string().min(1),
 			categoryId: z.string().min(1),
 			channelName: z.string().min(2),
+			isPrivate: z.boolean().optional(),
+			position: z.enum([ 'top', 'bottom' ]).optional(),
 		})
 	),
 
