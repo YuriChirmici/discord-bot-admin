@@ -19,7 +19,7 @@ class AppDataService {
 
 	createWindow(): BrowserWindow {
 		const win = new BrowserWindow({
-			icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+			icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
 			width: 1280,
 			height: 720,
 			backgroundColor: '#121212',

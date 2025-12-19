@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 *.local
 .env
+.claude
 test-data
 
 # Editor directories and files
