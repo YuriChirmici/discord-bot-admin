@@ -16,7 +16,7 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }
 	const [ dirtyConfig, setDirtyConfig ] = useState<TConfig>(config!);
 	const { showAlert } = useAlertStore();
 
-	const handleSave = async () => {
+	const handleSave = async (): Promise<void> => {
 		try {
 			if (!validate) {
 				return;

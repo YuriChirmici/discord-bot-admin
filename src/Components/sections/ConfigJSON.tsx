@@ -25,6 +25,7 @@ export const ConfigJSON: React.FC<Props> = () => {
 			setLoading(true);
 			const newConfig = await setConfig(parsedConfig);
 			setAppData(newConfig);
+			showAlert('Настройки успешно сохранены', 'success');
 		} catch (err) {
 			showAlert((err instanceof Error ? err.message : ''), 'error');
 		} finally {
