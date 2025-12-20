@@ -3,6 +3,7 @@ import { TConfig } from '../schemas/config/config';
 export interface ISection {
 	text: string;
 	path: string;
+	subsections?: ISection[];
 }
 
 interface IUseMenu {
@@ -19,6 +20,13 @@ export const useMenu = (config: TConfig | null): IUseMenu => {
 				{ text: 'Temp Voice', path: '/temp-voice' },
 				{ text: 'Слоты', path: '/slots' },
 				{ text: 'Полки', path: '/regiments' },
+				{
+					text: 'Роли',
+					path: '/roles',
+					subsections: [
+						{ text: 'Разделители', path: '/roles/dividers' }
+					]
+				},
 				{ text: 'Удаленные сообщения', path: '/deleted-messages' },
 				{ text: 'JSON', path: '/config-json' },
 			] : []

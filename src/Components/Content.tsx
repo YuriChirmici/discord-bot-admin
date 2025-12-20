@@ -7,6 +7,7 @@ import { TempVoice } from './sections/temp-voice/TempVoice';
 import { Slots } from './sections/slots/Slots';
 import { Regiments } from './sections/regiments/Regiments';
 import { DeletedMessages } from './sections/DeletedMessages';
+import { RolesDividers } from './sections/roles/RolesDividers';
 
 interface Props {}
 export const Content: React.FC<Props> = () => {
@@ -18,10 +19,14 @@ export const Content: React.FC<Props> = () => {
 				<Route path="/" element={<Settings />} />
 				<Route path="/general" element={<General />} />
 				<Route path="/config-json" element={<ConfigJSON />} />
+
 				<Route path="/temp-voice" element={<TempVoice />} />
+				<Route path="/deleted-messages" element={<DeletedMessages />} />
+
 				<Route path="/slots" element={<Slots />} />
 				<Route path="/regiments" element={<Regiments />} />
-				<Route path="/deleted-messages" element={<DeletedMessages />} />
+
+				<Route path="/roles/dividers" element={<RolesDividers />} />
 			</Routes>
 		</Container>
 	);

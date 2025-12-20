@@ -18,14 +18,13 @@ export const BaseConfigPageLayout: React.FC<Props> = ({ children, validate, sx }
 
 	const handleSave = async (): Promise<void> => {
 		try {
-			if (!validate) {
-				return;
-			}
 
-			const validationResult = validate(dirtyConfig);
-			if (!validationResult.isValid) {
-				showAlert(validationResult.validationError || 'Заполните все поля', 'error');
-				return;
+			if (validate) {
+				const validationResult = validate(dirtyConfig);
+				if (!validationResult.isValid) {
+					showAlert(validationResult.validationError || 'Заполните все поля', 'error');
+					return;
+				}
 			}
 
 			setLoading(true);

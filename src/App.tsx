@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Menu } from './components/Menu';
+import { Menu } from './components/menu/index';
 import { Provider } from './components/Provider';
 import { Content } from './components/Content';
 import { useAppStore } from './store/useAppStore';

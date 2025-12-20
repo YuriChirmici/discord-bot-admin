@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { adsConfigSchema } from './ads';
 import { mainConfigSchema } from './main';
 import { memberCommandsSchema } from './member-commands';
+import { rolesDividersSchema } from './roles-dividers';
 
 const ratingRolesSchema = z.object({
 	ratingRoles: z.object({
@@ -20,7 +21,8 @@ export const configSchema = z.object({})
 	.merge(mainConfigSchema)
 	.merge(ratingRolesSchema)
 	.merge(adsConfigSchema)
-	.merge(memberCommandsSchema);
+	.merge(memberCommandsSchema)
+	.merge(rolesDividersSchema);
 
 export type TConfig = z.infer<typeof configSchema>;
 
