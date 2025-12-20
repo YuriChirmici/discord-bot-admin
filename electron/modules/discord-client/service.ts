@@ -68,10 +68,12 @@ class ClientService {
 		const rolesMap = await this.guild.roles.fetch();
 		const roles = Array.from(rolesMap.values());
 
-		return roles.map(role => ({
-			id: role.id,
-			name: role.name,
-		}));
+		return roles
+			.sort((a, b) => b.position - a.position)
+			.map(role => ({
+				id: role.id,
+				name: role.name,
+			}));
 	}
 
 	async getChannels(): Promise<IChannel[]> {

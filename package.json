@@ -1,7 +1,7 @@
 {
   "name": "bot-admin-gui",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Admin GUI for Discord Bot",
   "author": "w3yuri",
   "type": "module",
