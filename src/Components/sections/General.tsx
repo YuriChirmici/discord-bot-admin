@@ -15,8 +15,8 @@ export const General: React.FC<Props> = () => {
 	const { channels } = useAppStore();
 
 	const validate = (dirtyConfig: TConfig) => {
-		const { guildId, clientId, token, botMemberId, errorsChannelId, sheetMembersChannelId } = dirtyConfig;
-		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !sheetMembersChannelId || !permissionsFlags) {
+		const { guildId, clientId, token, botMemberId, errorsChannelId, sheetMembersChannelId, generalLogsChannelId } = dirtyConfig;
+		if (!guildId || !clientId || !token || !botMemberId || !errorsChannelId || !sheetMembersChannelId || !permissionsFlags || !generalLogsChannelId) {
 			return { isValid: false };
 		}
 
