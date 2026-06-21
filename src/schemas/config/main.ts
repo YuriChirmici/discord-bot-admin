@@ -33,6 +33,7 @@ export const mainConfigSchema = z.object({
 	}),
 
 	sheetMembersChannelId: z.string().min(1),
+	generalLogsChannelId: z.string().min(1),
 	sheetValidationCode: z.string().min(1),
 
 	regiments: z.array(

@@ -108,6 +108,22 @@ export const General: React.FC<Props> = () => {
 					options={channels.filter(c => c.type === 0)}
 					getOptionLabel={(option) => option.name}
 					getOptionKey={(option => option.id)}
+					value={channels.find(c => c.id === dirtyConfig.generalLogsChannelId) || null}
+					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, generalLogsChannelId: val?.id || '' }))}
+					sx={{ mb: 3 }}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							label="Канал общих логов"
+							error={!dirtyConfig.generalLogsChannelId}
+						/>
+					)}
+				/>
+
+				<Autocomplete
+					options={channels.filter(c => c.type === 0)}
+					getOptionLabel={(option) => option.name}
+					getOptionKey={(option => option.id)}
 					value={channels.find(c => c.id === dirtyConfig.sheetMembersChannelId) || null}
 					onChange={(_, val) => setDirtyConfig(({ ...dirtyConfig, sheetMembersChannelId: val?.id || '' }))}
 					sx={{ mb: 3 }}
